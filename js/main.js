@@ -87,3 +87,4 @@ video.addEventListener("ended", () => {
     // 동영상 실행 아이콘 숨기기
     playIcon.style.display = "none";
 });
+
