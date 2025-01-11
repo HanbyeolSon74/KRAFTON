@@ -4,7 +4,7 @@ body {
     color: white;
     margin: 0;
     font-family: Arial, sans-serif;
-    height: 200vh;
+
     justify-content: center; 
     align-items: center;
     font-family: "Noto Sans", "Noto Sans SC", "Noto Sans KR", Dotum, 돋움, Helvetica, "Apple SD Gothic Neo", sans-serif;
@@ -30,7 +30,6 @@ body {
     bottom: 0; 
     left: 0;
     width: 100%; 
-
 }
 
 /* 사이트 헤더 메뉴 (메뉴 및 로고 포함) */
@@ -39,9 +38,9 @@ body {
     margin: 0 auto;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-start; 
     padding: 0 4vw;
-    gap: 80px;
+    gap: 60px;
     position: relative; 
 }
 
@@ -54,15 +53,17 @@ body {
     background-size: contain; 
     background-repeat: no-repeat;
     flex-shrink: 0;
+    margin-right: 50px; 
 }
 
 /* 메뉴 스타일 */
 .Nav-menu {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 50px;
     position: relative;
-    width: 100%; 
+    flex-grow: 1; 
+    justify-content: center; 
 }
 
 /* 메뉴 항목 스타일 */
@@ -93,15 +94,21 @@ body {
     width: 100%; 
 }
 
-
 /* 언어 선택 링크 스타일 */
 .SiteHeaderLang-link {
-    font-weight: bold;
     text-transform: uppercase;
-    color: #ccc; 
-    margin-left: 20px; 
-    font-size: 10px;
+    color: #fff; 
+    font-size: 8px;
+    margin-left: auto; 
+    transition: color 0.3s ease; /* 호버 시 색상만 변하도록 설정 */
 }
+
+/* 언어 선택 링크 호버 효과 */
+.SiteHeaderLang-link:hover {
+    color: #ccc;  /* 호버 시 색상만 변경 (밑줄은 없음) */
+    text-decoration: none; /* 호버 시 밑줄을 제거 */
+}
+
 
 /* 반응형 (모바일) */
 @media (max-width: 768px) {
@@ -117,6 +124,7 @@ body {
     }
 }
 
+
 /* 배너 전체 컨테이너 */
 .SingleGameTopBanner {
     position: relative;
@@ -124,23 +132,27 @@ body {
     height: 600px; 
     background-color: black;
     overflow: hidden; 
+    left: 8%; 
 }
 
 /* 배너 이미지 */
 .SingleTopBanner-thubnail {
     position: absolute;
-    top: 50%;
-    left: 55%;
+    top: 40%;
+    left: 50%;
     transform: translate(-50%, -50%);
-    width: 700px; 
-    height: 500px; 
-    background-image: url('/img/battle-thubnail.png');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     z-index: 1;
 }
 
+/* 배너 이미지 */
+.SingleTopBanner-thubnail-img {
+    width: 750px;
+    height: 550px;
+    object-fit: contain; /* 이미지가 비율을 유지하며 크기 맞추기 */
+}
 
 /* 텍스트 컨테이너 */
 .SingleGameTopBannerinner-layer-text {
@@ -226,8 +238,8 @@ body {
 /* 배너 하단 링크 (배너 이미지 바로 오른쪽 하단 배치) */
 .SingleGameBottomLink-Opacity {
     position: absolute;
-    bottom: 0; 
-    right: 0; 
+    bottom: 40px; /* 배너 이미지 아래로 20px 간격 추가 */
+    right: 28%; 
     display: flex;
     flex-direction: row; 
     align-items: center; 
@@ -355,273 +367,111 @@ body {
     margin-bottom: 80px; 
 }
 
+/* 3개의 이미지 */
 
-/* 왼쪽 */
-
-
-/* 왼쪽 컨테이너 */
-.SingleGameTempLeft-Game {
-    display: flex;
-    justify-content: flex-start; 
-    align-items: center;
+/* 공통 스타일 */
+.SingleGameTempLeft-Game,
+.SingleGameTempRight-Game {
     position: relative;
+    width: 100%;
     height: 500px;
-    padding-left: 130px; 
+    display: flex;
+    overflow: hidden;
+    margin-bottom: 50px;
 }
 
-/* 왼쪽 이미지 */
+/* 왼쪽 보여지는 부분 */
+.SingleGameTempLeftTumb,
+.SingleGameTempLeftTumb2 {
+    position: relative;
+    top: 50px;
+    left: 120px;
+    width: 750px;
+    height: 440px;
+    overflow: hidden;
+    border: 2px solid #ccc;
+}
+
+/* 오른쪽 보여지는 부분 */
+.SingleGameTempRightTumb {
+    position: relative;
+    top: 50px;
+    right: 120px;
+    width: 750px;
+    height: 440px;
+    overflow: hidden;
+    border: 2px solid #ccc;
+}
+
 .SingleGameTempLeftTumb-img,
-.SingleGameTempLeftTumb2-img {
-    width: 740px;
-    height: 420px; 
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative; 
-    z-index: 1; 
-    margin-left: 0; 
-    top: 0; 
-}
-
-
-
-.SingleGameTempLeftTumb-img{
-    transition: transform 0.1s ease; /* 부드러운 이동 효과 */
-}
-
-/* 텍스트 섹션 */
-.SingleGameTempLeftCont {
+.SingleGameTempLeftTumb2-img,
+.SingleGameTempRightTumb-img {
     position: absolute;
-    top: 20%;
-    left: 680px;
+    top: -100px;
+    left: -50px;
+    width: 900px;
+    height: 600px;
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+}
+
+
+.SingleGameTempLeftCont,
+.SingleGameTempRightCont {
+    position: absolute;
     z-index: 2;
     max-width: 600px;
     color: white;
     padding: 20px;
 }
 
-/* 텍스트 내부 스타일 */
-.SingleGameTempLeftCont-inner {
-    font-size: 14px;
-}
-
-/* 제목 스타일 */
-.SingleGameTempLeftCont-title {
-    font-size: 37px;
-    margin-bottom: 25px; 
-}
-
-/* 목록 스타일 */
-.SingleGameTempLeftCont-inner ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-}
-
-/* 목록 항목 스타일 */
-.SingleGameTempLeftCont-inner li {
-    position: relative;
-    margin-bottom: 10px; 
-    display: flex;
-    align-items: center;
-}
-
-/* - 기호 스타일 */
-.SingleGameTempLeftCont-inner li::before {
-    content: "–"; 
-    position: absolute;
-    left: 0; 
-    font-size: 14px; 
-    color: #fff;
-    margin-right: 20px; 
-    z-index: 1; 
-}
-
-/*  텍스트 스타일 */
-.SingleGameTempLeftCont-bulletText {
-    font-size: 16px;
-    color: #fff;
-    padding-left: 20px; 
-    margin-top: 0; 
-    margin-bottom: 0; 
-}
-
-/* 오른쪽 */
-
-/* 오른쪽 컨테이너 */
-.SingleGameTempRight-Game {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    margin-bottom: 350px;
-    padding-right: 100px;
-}
-
-/* 오른쪽 이미지 */
-.SingleGameTempRightTumb-img {
-    width: 740px;
-    height: 420px;
-    background-position: center center;
-    z-index: 1;
-    position: absolute;
-    top: -200px;
-    right: 200px;
-}
-
-/* 오른쪽 텍스트 */
-.SingleGameTempRightCont {
-    position: absolute;
-    left: 150px; 
-    z-index: 3; 
-    max-width: 600px;
-    color: white;
-    padding: 20px;
-}
-
-/* 텍스트 스타일 */
+.SingleGameTempLeftCont-inner,
 .SingleGameTempRightCont-inner {
     font-size: 14px;
-    padding-left: 0; 
-    margin: 0; 
-    display: flex;
-    flex-direction: column;
 }
 
-/* 제목 스타일 */
+.SingleGameTempLeftCont-title,
 .SingleGameTempRightCont-title {
-    font-size: 35px;
-    margin-bottom: 20px; 
+    font-size: 40px;
+    margin-bottom: 25px;
+    animation: slideIn 1s ease-out forwards;
 }
 
-/* 목록 스타일 */
+.SingleGameTempLeftCont-inner ul,
 .SingleGameTempRightCont-inner ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
     margin: 0;
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideInDelayed 1s ease-out forwards;
+    animation-delay: 1s;
 }
 
-/* 목록 항목 */
+.SingleGameTempLeftCont-inner li,
 .SingleGameTempRightCont-inner li {
+    position: relative;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    padding-left: 0;
 }
 
 /* - 기호 스타일 */
+.SingleGameTempLeftCont-inner li::before,
 .SingleGameTempRightCont-inner li::before {
     content: "–";
     position: relative;
     left: 0; 
     font-size: 14px;
     color: #fff;
-    margin-right: 10px; 
+    margin-right: 10px; /* 공통 스타일에 오른쪽 간격 추가 */
 }
 
-/* 왼쪽과 오른쪽 콘텐츠 간 간격 추가 */
-.SingleGameTempLeft-Game,
-.SingleGameTempRight-Game {
-    margin-bottom: 350px; 
-}
-
-/* 타이틀 애니메이션 */
-@keyframes slideInFromLeft {
+/* 애니메이션 */
+@keyframes slideIn {
     0% {
-        transform: translateX(-100%); /* 화면 왼쪽 밖에서 시작 */
-        opacity: 0; /* 투명하게 시작 */
-    }
-    100% {
-        transform: translateX(0); /* 제자리로 이동 */
-        opacity: 1; /* 불투명 */
-    }
-}
-
-/* 목록 애니메이션 */
-@keyframes slideInFromLeftDelayed {
-    0% {
-        transform: translateX(-100%); /* 화면 왼쪽 밖에서 시작 */
-        opacity: 0; /* 투명하게 시작 */
-    }
-    100% {
-        transform: translateX(0); /* 제자리로 이동 */
-        opacity: 1; /* 불투명 */
-    }
-}
-
-/* 왼쪽 텍스트 섹션 */
-.SingleGameTempLeftCont {
-    position: absolute;
-    top: 20%;
-    left: 680px;
-    z-index: 2;
-    max-width: 600px;
-    color: white;
-    padding: 20px;
-}
-
-/* 타이틀 */
-.SingleGameTempLeftCont-title {
-    font-size: 37px;
-    margin-bottom: 25px; 
-    animation: slideInFromLeft 1s ease-out forwards; 
-}
-
-/* 목록 */
-.SingleGameTempLeftCont-inner ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    opacity: 0; /* 목록은 처음에 보이지 않음 */
-    transform: translateX(-100%); /* 목록을 화면 왼쪽 밖으로 설정 */
-    animation: slideInFromLeftDelayed 1s ease-out forwards; /* 목록 애니메이션 */
-    animation-delay: 1s; /* 타이틀 애니메이션이 끝난 후 시작 */
-}
-
-/* 목록 항목 스타일 */
-.SingleGameTempLeftCont-inner li {
-    position: relative;
-    margin-bottom: 10px; 
-    display: flex;
-    align-items: center;
-}
-
-/* - 기호 스타일 */
-.SingleGameTempLeftCont-inner li::before {
-    content: "–"; 
-    position: absolute;
-    left: 0; 
-    font-size: 14px; 
-    color: #fff;
-    margin-right: 20px; 
-    z-index: 1; 
-}
-
-/*  텍스트 스타일 */
-.SingleGameTempLeftCont-bulletText {
-    font-size: 16px;
-    color: #fff;
-    padding-left: 20px; 
-    margin-top: 0; 
-    margin-bottom: 0; 
-}
-/* 타이틀 애니메이션 */
-@keyframes slideInFromRight {
-    0% {
-        transform: translateX(100%); /* 화면 오른쪽 밖에서 시작 */
-        opacity: 0; /* 투명하게 시작 */
-    }
-    100% {
-        transform: translateX(0); /* 제자리로 이동 */
-        opacity: 1; /* 불투명 */
-    }
-}
-
-/* 목록 애니메이션 */
-@keyframes slideInFromRightDelayed {
-    0% {
-        transform: translateX(100%); 
-        opacity: 0; 
+        transform: translateX(-100%);
+        opacity: 0;
     }
     100% {
         transform: translateX(0);
@@ -629,126 +479,182 @@ body {
     }
 }
 
-/* 오른쪽 텍스트 섹션 */
+@keyframes slideInDelayed {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 오른쪽 섹션 레이아웃 */
+.SingleGameTempRight-Game {
+    flex-direction: row-reverse;
+}
+
 .SingleGameTempRightCont {
-    position: absolute;
-    left: 150px; 
-    z-index: 3;
-    max-width: 600px;
-    color: white;
-    padding: 20px;
+    left: 150px;
 }
 
-/* 타이틀 */
-.SingleGameTempRightCont-title {
-    font-size: 35px;
-    margin-bottom: 10px; 
-    animation: slideInFromRight 1s ease-out forwards; 
+/* 왼쪽 섹션 레이아웃 */
+.SingleGameTempLeftCont {
+    top: 20%;
+    left: 680px;
 }
 
-/* 목록 */
-.SingleGameTempRightCont-inner ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    opacity: 0;
-    transform: translateX(100%);
-    animation: slideInFromRightDelayed 1s ease-out forwards; 
-    animation-delay: 1s; 
+/* 오른쪽 섹션 레이아웃 */
+.SingleGameTempRightCont {
+    top: 10%;
 }
 
-/* 목록 항목 */
-.SingleGameTempRightCont-inner li {
-    margin-bottom: 10px;
+/* 게임 text와 4개의 이미지 */
+
+/* 이미지 리스트 */
+.SinglegametempPhotoList {
     display: flex;
+    justify-content: center;
     align-items: center;
-    padding-left: 0; 
+    margin-top: 20px;
 }
 
-/* - 기호 스타일 */
-.SingleGameTempRightCont-inner li::before {
-    content: "–";
-    position: relative;
-    left: 0; 
-    font-size: 14px;
-    color: #fff;
-    margin-right: 10px; 
+/* 4개의 이미지 */
+.SinglegametempPhotoList-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/*  텍스트 스타일 */
-.SingleGameTempRightCont-bulletText {
+/* 4개의 이미지 각각*/
+.SinglegametempPhotoList-item {
+    width: 515px;
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 사진과 텍스트 간 간격 조정 */
+.SinglegametempPhotoList {
+    margin-top: -185px;
+}
+
+.SinglegametempPhotoList-list {
+    margin-top: 10px; /* 리스트의 텍스트와 이미지 간격 좁히기 */
+}
+
+/* 게임 하단 text */
+.SingleGameTempCont {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    margin-top: 100px;
+}
+
+.SingleGameTempCont-list {
+    list-style: none; /* 목록 점 제거 */
+    padding: 0; /* 기본 패딩 제거 */
+    margin: 0; /* 기본 마진 제거 */
+}
+
+.SingleGameTempContItemNumber {
+    font-size: 60px;
+}
+
+/* 게임 하단 list */
+/* 부모 컨테이너: 화면 중앙 정렬 */
+.SingleGameTempList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 전체 화면 높이 차지 */
+    margin: 0 auto; /* 수평 가운데 정렬 */
+}
+
+/* 내부 컨테이너: 왼쪽과 오른쪽으로 나누기 */
+.SingleGameTempList-inner {
+    display: flex;
+    max-width: 1200px; /* 전체 컨텐츠의 최대 너비 */
+    width: 600px;
+    align-items: flex-start; /* 세로 방향 정렬 */
+}
+
+/* 왼쪽 박스 스타일 */
+.SingleGameTempListTitle {
+    flex: 1; /* 왼쪽 박스의 크기 비율 */
+    text-align: left;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 오른쪽 박스 스타일 */
+.SingleGameTempListCont {
+    flex: 2; /* 오른쪽 박스의 크기 비율 */
+    text-align: left;
+}
+
+/* 리스트 스타일 */
+.SingleGameTempListCont-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.SingleGameTempListCont-item {
+    margin-bottom: 20px;
     font-size: 16px;
-    color: #fff;
-    padding-left: 20px; 
-    margin-top: 0; 
-    margin-bottom: 0; 
-}
-/* 타이틀 애니메이션 (왼쪽에서 오른쪽으로) */
-@keyframes slideInFromLeft {
-    0% {
-        transform: translateX(-100%); /* 화면 왼쪽 밖에서 시작 */
-        opacity: 0; /* 투명하게 시작 */
-    }
-    100% {
-        transform: translateX(0); /* 제자리로 이동 */
-        opacity: 1; /* 불투명 */
-    }
-}
-
-/* 목록 애니메이션 (왼쪽에서 오른쪽으로) */
-@keyframes slideInFromLeftDelayed {
-    0% {
-        transform: translateX(-100%); /* 화면 왼쪽 밖에서 시작 */
-        opacity: 0; /* 투명하게 시작 */
-    }
-    100% {
-        transform: translateX(0); /* 제자리로 이동 */
-        opacity: 1; /* 불투명 */
-    }
-}
-
-/* 오른쪽 텍스트 섹션 */
-.SingleGameTempRightCont {
-    position: absolute;
-    left: 150px; /* 왼쪽에서 적당히 겹치게 하기 위한 여백 */
-    z-index: 3; /* 텍스트가 이미지 위로 오도록 z-index 높임 */
-    max-width: 600px;
     color: white;
-    padding: 20px;
 }
 
-/* 타이틀 */
-.SingleGameTempRightCont-title {
-    font-size: 35px;
-    margin-bottom: 10px; 
-    animation: slideInFromLeft 1s ease-out forwards; /* 타이틀 애니메이션 */
+/* 스토어 링크 컨테이너 */
+.SingleGameStore {
+    margin-top: 20px;
 }
 
-/* 목록 */
-.SingleGameTempRightCont-inner ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    opacity: 0; 
-    transform: translateX(-100%); /* 목록을 화면 왼쪽 밖으로 설정 */
-    animation: slideInFromLeftDelayed 1s ease-out forwards; /* 목록 애니메이션 */
-    animation-delay: 1s; /* 타이틀 애니메이션이 끝난 후 시작 */
-}
-
-/* 목록 항목 */
-.SingleGameTempRightCont-inner li {
-    margin-bottom: 10px;
+.SingleGameStore-list {
+    list-style: none; /* 점(기본 목록 스타일) 제거 */
     display: flex;
-    align-items: center;
-    padding-left: 0; 
+    gap: 20px; /* 아이콘 간격 */
 }
 
-/* - 기호 스타일 */
-.SingleGameTempRightCont-inner li::before {
-    content: "–";
-    position: relative;
-    left: 0; 
-    font-size: 14px;
-    color: #fff;
-    margin-right: 10px; 
+.SingleGameStore-item{
+    width: 130px;
+    height: auto;
+}
+
+/* a 태그에 border를 적용하고 inline-block으로 처리 */
+.SingleGameStoreItem-link {
+    display: inline-block; /* 이미지 크기에 맞게 a 태그가 block처럼 동작 */
+    border: solid 1px #393939;
+    padding: 7px 15px;
+}
+
+/* 스토어 이미지 크기 설정 */
+.SingleGameStore-item img {
+    width: 120px;
+    height: auto;
+}
+
+/* 게임하단 Link */
+.SingleGameTempStudio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.SingleGameTempStudio-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 15px;
+    border: solid 1px #ccc;
+    width: 900px; /* 필요에 따라 크기 설정 */
 }

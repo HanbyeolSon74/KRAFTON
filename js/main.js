@@ -88,3 +88,67 @@ video.addEventListener("ended", () => {
     playIcon.style.display = "none";
 });
 
+// 3개의 이미지 스크롤 시 효과
+document.addEventListener('DOMContentLoaded', () => {
+    const img = document.getElementById('ScrollLeftimg');
+    const tumbContainer = document.querySelector('.SingleGameTempLeftTumb');
+    let isTumbVisible = false;
+
+    // Intersection Observer 설정
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                isTumbVisible = true; // 요소가 화면에 보임
+            } else {
+                isTumbVisible = false; // 요소가 화면에서 벗어남
+            }
+        });
+    });
+
+    // 타겟 요소 감시 시작
+    observer.observe(tumbContainer);
+
+    // 스크롤 이벤트 핸들링
+    document.addEventListener('scroll', () => {
+        if (isTumbVisible) {
+            const scrollY = window.scrollY;
+            const containerTop = tumbContainer.getBoundingClientRect().top + window.scrollY;
+            const translateY = Math.max(0, scrollY - containerTop); // 이미지 이동 계산
+            img.style.transform = `translateY(${translateY}px)`;
+        }
+    });
+});
+
+// 게임 하단 숫자
+document.addEventListener("DOMContentLoaded", function () {
+    let counterElement = document.getElementById("counter");
+    let hasCounted = false;
+
+    function animateCounter(start, end, duration) {
+        let startTime = null;
+
+        function updateCounter(currentTime) {
+            if (!startTime) startTime = currentTime;
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const currentNumber = Math.floor(progress * (end - start) + start);
+            counterElement.textContent = currentNumber.toLocaleString();
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            }
+        }
+
+        requestAnimationFrame(updateCounter);
+    }
+
+    function handleScroll() {
+        const rect = counterElement.getBoundingClientRect();
+        if (rect.top < window.innerHeight && !hasCounted) {
+            hasCounted = true;
+            animateCounter(0, 55000000, 2000); // 2초 동안 애니메이션
+        }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+});

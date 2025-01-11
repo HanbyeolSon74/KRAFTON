@@ -46,7 +46,9 @@
                     </ul>
                 </div>
                 <!-- 배너 이미지 -->
-                <div class="SingleTopBanner-thubnail"></div>
+                <div class="SingleTopBanner-thubnail">
+                    <img id="Banner-thubnale" class="SingleTopBanner-thubnail-img" src="/img/battle-thubnail.png" alt="thubnale"/>
+                </div>
             </div>
            <!-- 공식 사이트 및 바로가기 (오른쪽 하단 배치) -->
             <div class="SingleGameBottomLink-Opacity">
@@ -71,7 +73,7 @@
                         <span class="SingleGameTempFullPhoto-icon"></span>
                         <!-- 동영상은 YouTube iframe으로 표시 -->
                     <div id="video" style="display: none;">
-                        <iframe width="560" height="315" src="https://www.youtube.com/embed/htld_r86pfI?si=xAg7IDMqvxYz8qNM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        <iframe loading="lazy" title="pubg-new-state" src="https://www.youtube.com/embed/htld_r86pfI" width="100%" height="100%" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
                     </div>
                     </a>
                 </div>
@@ -81,7 +83,7 @@
 
                 <!-- 왼쪽 첫번째 -->
                 <div class="SingleGameTempLeft-Game">
-                    <!-- 이미지 -->
+                    <!-- 이미지 보여지는 영역 -->
                     <div class="SingleGameTempLeftTumb">
                         <img id="ScrollLeftimg" class="SingleGameTempLeftTumb-img" src="/img/bt-new-img2-min.png" alt="Scrollimg2"/>
                     </div>
@@ -155,22 +157,118 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- 이미지 4개 -->
                 <div class="SinglegametempPhotoList">
                     <!-- 이미지만 포함 -->
                     <ul class="SinglegametempPhotoList-list">
-                        <li class="SinglegametempPhotoList-item"></li>
-                        <li class="SinglegametempPhotoList-item"></li>
-                        <li class="SinglegametempPhotoList-item"></li>
-                        <li class="SinglegametempPhotoList-item"></li>
+                        <li class="SinglegametempPhotoList-item" style="background-image: url('/img/bg-Trailer-Park-min.png');"></li>
+                        <li class="SinglegametempPhotoList-item" style="background-image: url('/img/bg-Lab-min.png');"></li>
+                        <li class="SinglegametempPhotoList-item" style="background-image: url('/img/bg-Exhibit-Hall-min.png');"></li>
+                        <li class="SinglegametempPhotoList-item" style="background-image: url('/img/bg-Hall-min.png');"></li>
                     </ul>
                 </div>
-                <!-- 게임 text 하단 -->
-                 <div></div>
+
+                <!-- 게임 하단 text -->
+                 <div class="SingleGameTempCont">
+                    <ul class="SingleGameTempCont-list">
+                        <li class="SingleGameTempCont-item">
+                            <dl class="SingleGameTempContItem">
+                                <dt class="SingleGameTempContItemTitle">
+                                    글로벌 사전 예약자 수
+                                </dt>
+                                <dd class="SingleGameTempContItemNumber">
+                                    <span class="SingleGameTempContItemNumber-count" id="counter">0</span>
+                                    <span class="SingleGameTempContItemNumber-text">+</span>
+                                </dd>
+                            </dl>
+                        </li>
+                    </ul>
+                 </div>
+
+                <!-- 게임 하단 list -->
+                <div class="SingleGameTempList">
+                    <dl class="SingleGameTempList-inner"> 
+                        <!-- 게임 하단 list 왼쪽 -->
+                        <dt class="SingleGameTempListTitle">
+                            <div class="SingleGameTempListTitle-title">
+                                <span class="SingleGameTempListTitle-text">Game Platform</span>
+                            </div>
+                        </dt>
+
+                        <!-- 게임 하단 list 오른쪽 -->
+                        <dd class="SingleGameTempListCont">
+                            <ul class="SingleGameTempListCont-list">
+                                <li class="SingleGameTempListCont-item">
+                                    <div class="SingleGameTempAtc">
+                                        <div class="SingleGameTempAtc-title">뉴스테이트 모바일(공식사이트)</div>
+                                        <p class="SingleGameTempAtc-text">
+                                            <a class="SingleGameTempAtc-link" href="https://newstate.pubg.com/index.html" target="_blank" rel="noopener">
+                                                <span class="TextHoverLine">공식 사이트 바로가기</span>
+                                            </a>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="SingleGameTempListCont-item">
+                                    <div class="SingleGameTempAtc">
+                                        <div class="SingleGameTempAtc-title">뉴스테이트 모바일</div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <!-- Store -->
+                            <div class="SingleGameStore">
+                                <ul class="SingleGameStore-list">
+                                    <!-- 구글 -->
+                                    <li class="SingleGameStore-item">
+                                        <div class="SingleGameStoreItem">
+                                            <a class="SingleGameStoreItem-link" href="https://play.google.com/store/apps/details?id=com.pubg.newstate" target="_blank" rel="noopener">
+                                                <img src="/img/logo-banner-google.png" alt="Google Play" />
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <!-- 애플 -->
+                                    <li class="SingleGameStore-item">
+                                        <div class="SingleGameStoreItem">
+                                            <a class="SingleGameStoreItem-link" href="https://apps.apple.com/app/id1542727626" target="_blank" rel="noopener">
+                                                <img src="/img/logo-banner-app.png" alt="App Store" />
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </dd>
+                    </dl>
+                </div>
+
+                 <!-- 게임 하단 link -->
+                <div class="SingleGameTempStudio">
+                    <!-- 게임 하단 -->
+                    <a class="SingleGameTempStudio-link">
+                        <div class="SingleGameTempStudioThumb Logo-Pubg">
+                            <img src="/img/studio-pubg-logo-1.png" alt="PUBG Studios" />
+                        </div>
+                        <!-- 게임 하단 link text -->
+                        <div class="SingleGameTempStudioCont">
+                            <div class="SingleGameTempStudioMeta">
+                                <span class="SingleGameTempStudioMeta-item">DEVELOPER</span>
+                                <span class="SingleGameTempStudioMeta-item">PUBLISHER</span>
+                            </div>
+                            <h5 class="SingleGameTempStudio-title">
+                                <span class="TextHoverLine">PUBG STUDIOS</span>
+                            </h5>
+                            <div class="SingleGameTempStudio-sub">PUBG를 가장 강력한 문화 IP로 성장시키겠습니다</div>
+                            <div class="SingleGameTempStudio-arrow">
+                                <span class="ab-text">More</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
 
             </div>
         </div>
-        
     </main>
     <footer>
 
