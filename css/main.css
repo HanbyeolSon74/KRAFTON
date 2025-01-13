@@ -380,40 +380,27 @@ body {
     margin-bottom: 50px;
 }
 
-/* 왼쪽 보여지는 부분 */
-.SingleGameTempLeftTumb,
-.SingleGameTempLeftTumb2 {
+/* 이미지가 보여지는 고정 영역 */
+.SingleGameTempLeftTumb {
     position: relative;
-    top: 50px;
-    left: 120px;
     width: 750px;
-    height: 440px;
-    overflow: hidden;
+    height: 440px; /* 고정된 높이 */
+    overflow: hidden; /* 고정된 영역 밖 이미지 숨김 */
     border: 2px solid #ccc;
-}
-
-/* 오른쪽 보여지는 부분 */
-.SingleGameTempRightTumb {
-    position: relative;
-    top: 50px;
-    right: 120px;
-    width: 750px;
-    height: 440px;
-    overflow: hidden;
-    border: 2px solid #ccc;
-}
-
-.SingleGameTempLeftTumb-img,
-.SingleGameTempLeftTumb2-img,
-.SingleGameTempRightTumb-img {
+    margin: 0 auto; /* 가운데 정렬 */
+  }
+  
+  /* 스크롤 시 움직이는 이미지 */
+  .SingleGameTempLeftTumb-img {
     position: absolute;
-    top: -100px;
-    left: -50px;
-    width: 900px;
-    height: 600px;
-    transition: transform 0.1s ease-out;
-    will-change: transform;
-}
+    top: 0; /* 초기 위치 설정 */
+    left: 0;
+    width: 900px; /* 이미지의 가로 크기를 고정 영역에 맞춤 */
+    height: 600px; /* 비율에 따라 세로 크기 조정 */
+    transform: translateY(0); /* 초기 상태 */
+    transition: transform 0.1s ease-out; /* 부드러운 이동 */
+  }
+
 
 
 .SingleGameTempLeftCont,
@@ -538,6 +525,34 @@ body {
     background-position: center;
     background-color: rgba(0, 0, 0, 0.1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0; /* 기본적으로 숨겨짐 */
+    animation: fadeIn 1s forwards; /* 애니메이션 */
+}
+/* 애니메이션 설정 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0; /* 처음에는 투명 */
+    }
+    100% {
+        opacity: 1; /* 마지막에는 보이도록 설정 */
+    }
+}
+
+/* 각 이미지에 지연 시간 추가 */
+.SinglegametempPhotoList-item:nth-child(1) {
+    animation-delay: 0.1s; /* 첫 번째 이미지 */
+}
+
+.SinglegametempPhotoList-item:nth-child(2) {
+    animation-delay: 0.4s; /* 두 번째 이미지 */
+}
+
+.SinglegametempPhotoList-item:nth-child(3) {
+    animation-delay: 0.7s; /* 세 번째 이미지 */
+}
+
+.SinglegametempPhotoList-item:nth-child(4) {
+    animation-delay: 1s; /* 네 번째 이미지 */
 }
 
 /* 사진과 텍스트 간 간격 조정 */
@@ -566,95 +581,479 @@ body {
     font-size: 60px;
 }
 
-/* 게임 하단 list */
-/* 부모 컨테이너: 화면 중앙 정렬 */
+
+
+/* 게임 정보 영역 스타일 */
 .SingleGameTempList {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 전체 화면 높이 차지 */
-    margin: 0 auto; /* 수평 가운데 정렬 */
+    display: flex; /* 플렉스 레이아웃 */
+    flex-direction: column; /* 세로 방향 정렬 */
+    padding: 20px;
+    align-items: center; /* 가로 방향 중앙 정렬 */
 }
 
-/* 내부 컨테이너: 왼쪽과 오른쪽으로 나누기 */
 .SingleGameTempList-inner {
-    display: flex;
-    max-width: 1200px; /* 전체 컨텐츠의 최대 너비 */
-    width: 600px;
-    align-items: flex-start; /* 세로 방향 정렬 */
+    display: flex; /* 양쪽 정렬 */
+    align-items: flex-start;
+    width: 800px; /* .SingleGameTempStudio와 동일한 너비 설정 */
+    max-width: 1200px; /* 동일한 최대 너비 */
+    height: 180px;
+    gap: 30px;
 }
 
-/* 왼쪽 박스 스타일 */
-.SingleGameTempListTitle {
-    flex: 1; /* 왼쪽 박스의 크기 비율 */
-    text-align: left;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* 오른쪽 박스 스타일 */
+.SingleGameTempListTitle,
 .SingleGameTempListCont {
-    flex: 2; /* 오른쪽 박스의 크기 비율 */
+    margin: 0; /* 기본 margin 제거 */
+}
+
+.SingleGameTempListTitle-title {
+    width: 200px;
+    height: 180px;
+}
+
+.SingleGameTempListTitle-text {
+    font-size: 25px;
+}
+
+/* <ul> 항목에 대한 점을 제거 */
+.SingleGameTempListCont-list,
+.SingleGameStore-list {
+    list-style: none; /* 점 제거 */
+    padding-left: 0; /* 왼쪽 여백 제거 */
+    margin: 0; /* 기본 margin 제거 */
+}
+
+/* 스튜디오 박스 스타일 */
+.SingleGameTempStudio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 20px;
+    width: 900px; /* .SingleGameTempList-inner와 동일한 너비 설정 */
+    max-width: 1200px; /* 동일한 최대 너비 */
+    color: #fff;
+    margin: 0 auto;
+}
+
+/* 스토어 버튼 스타일 */
+.SingleGameStore {
+    margin-top: 25px; /* 위쪽 여백 */
+}
+
+.SingleGameStore-list {
+    display: flex;
+    gap: 15px; /* 아이템 간격 */
+}
+
+/* 링크를 감싸는 a 태그에 스타일 적용 */
+.SingleGameStoreItem-link {
+    display: inline-block; /* a 태그를 인라인 블록으로 설정 */
+    border: solid 1px #393939;
+    padding: 10px; /* 내부 여백 */
+    background-color: transparent; /* 배경색 */
+    text-align: center; /* 이미지 가운데 정렬 */
+    width: 170px; /* 링크의 고정 너비 */
+    height: 60px; /* 링크의 고정 높이 */
+    box-sizing: border-box; /* 패딩 포함 크기 설정 */
+}
+
+/* 링크 호버 시 효과 */
+.SingleGameStoreItem-link:hover {
+    border: 1px solid white;
+}
+
+/* 이미지를 링크 크기에 맞추기 */
+.SingleGameStoreItem img {
+    width: 100%; /* 부모 요소(a 태그)에 맞게 이미지 너비 설정 */
+    height: 100%; /* 부모 요소에 맞게 이미지 높이 설정 */
+    object-fit: contain; /* 이미지 비율을 유지하면서 부모 요소에 맞춤 */
+}
+
+/* 게임 하단 link */
+.SingleGameTempStudio {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    padding: 20px;
+    width: 800px;
+    max-width: 1200px;
+    color: #fff;
+    margin: 0 auto;
+}
+
+.SingleGameTempStudio-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* 텍스트 컨테이너 스타일 */
+.SingleGameTempStudioCont {
+    flex: 1;
     text-align: left;
 }
 
-/* 리스트 스타일 */
-.SingleGameTempListCont-list {
+/* 메타 정보 스타일 */
+.SingleGameTempStudioMeta {
+    display: flex;
+    align-items: center;
+}
+
+.SingleGameTempStudioMeta-item {
+    color: #fff;
+    font-size: 14px;
+    padding: 0 10px;
+}
+
+.SingleGameTempStudioMeta-item:first-child {
+    border-right: 1px solid #fff;
+    padding-right: 10px;
+}
+
+.SingleGameTempStudioMeta-item:last-child {
+    padding-left: 10px;
+}
+
+/* 게임 하단 link 제목 스타일 */
+.SingleGameTempStudio-title .TextHoverLine {
+    font-size: 30px; /* 텍스트 크기 크게 */
+    color: #fff; /* 텍스트 색상 하얀색 */
+    padding-right: 5px;
+    position: relative;
+    z-index: 1;
+    text-decoration: none; /* 기본 밑줄 제거 */
+}
+
+/* 게임 하단 link 로고 스타일 */
+.SingleGameTempStudioThumb {
+    flex-shrink: 0;
+    margin-left: auto;
+    width: 130px;
+    height: auto;
+}
+
+.SingleGameTempStudioThumb img {
+    max-height: 80px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* 밑줄 효과 */
+.TextHoverLine::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: transparent;
+    transition: width 0.3s ease-in-out;
+}
+
+/* 호버 시 밑줄 효과 */
+.SingleGameTempStudio-link:hover .TextHoverLine::after {
+    width: 100%;
+    background-color: #999999;
+}
+
+/* 화살표 이미지 스타일 */
+.SingleGameTempStudio-arrow img {
+    width: 20px;
+    height: auto;
+}
+
+/* 바로가기 아이콘 링크 스타일 (SingleGameTempAtc-mobile) */
+.SingleGameTempAtc-mobile {
+    display: inline-block;
+    width: 10px; 
+    height: 10px; 
+    background-image: url('/img/ico-link-w.png'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+/* 이미지 스타일 */
+.TextHoverIcon {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* 호버 시 아이콘 애니메이션 */
+.SingleGameTempAtc-link:hover .TextHoverIcon {
+    transform: translateX(4px);
+}
+
+/* 제목 스타일 */
+.SingleGameTempAtc-title {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+/* 텍스트 컨테이너 스타일 */
+.SingleGameTempAtc-text {
+    margin-top: 0;
+}
+
+
+a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: inherit; /* 부모 요소에서 색상 상속받기 */
+}
+
+
+/* footer */
+footer {
+    color: #fff; /* 글자 색상 */
+    padding: 20px 0; /* 푸터 상하 여백 */
+    margin-top: 200px; /* footer와 main 사이에 여백 추가 */
+}
+
+.footer-container {
+    width: 100%;
+    max-width: 1200px; /* 최대 너비 */
+    margin: 0 auto; /* 가로 중앙 정렬 */
+    padding: 0 20px;
+}
+
+/* FooterSiteMenu: 가로로 정렬 */
+.FooterSiteMenu {
+    display: flex; /* 플렉스 레이아웃 */
+    justify-content: space-between; /* 메뉴 항목 간 간격을 균등하게 */
+    align-items: center; /* 세로 중앙 정렬 */
+    margin-bottom: 30px; /* 메뉴와 아래 콘텐츠 간의 간격 */
+    border-bottom: 1px solid #393939;
+}
+
+.FooterSiteUrl,
+.FooterSiteSNS {
+    display: flex;
+    gap: 30px; /* 항목 간 간격 */
+}
+
+.FooterSiteUrl ul,
+.FooterSiteSNS ul {
+    padding: 0;
+    list-style: none; /* 기본 목록점 제거 */
+    display: flex;
+    gap: 15px; /* 항목 간 간격 */
+}
+
+.FooterSiteUrl li a,
+.FooterSiteSNS li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px; /* 글씨 크기 줄이기 */
+}
+
+.FooterSiteUrl li,
+.FooterSiteSNS li {
+    margin-bottom: 0; /* 항목의 아래 간격 제거 */
+    position: relative;
+}
+
+/* li 요소 사이에만 border-right 적용 */
+.FooterSiteUrl li:not(:last-child) {
+    border-right: 1px solid #393939; /* 항목 사이에 border 추가 */
+    padding-right: 15px; /* 텍스트 오른쪽 여백 */
+}
+
+/* FooterSiteSNS 항목에는 경계선 없애기 */
+.FooterSiteSNS li {
+    border-right: none; /* 경계선 없앰 */
+}
+
+.FooterSiteUrl li a:hover,
+.FooterSiteSNS li a:hover {
+    color: #f8f8f8; /* 호버 시 색상 변경 */
+}
+
+/* FooterSiteUrl 링크 스타일 */
+.FooterSiteUrl li a {
+    text-decoration: none; /* 밑줄 제거 */
+    color: #fff; /* 기본 글씨 색상 */
+    font-size: 14px; /* 글씨 크기 줄이기 */
+}
+
+/* 개인정보처리방침만 bold */
+.FooterSiteUrl li#menu-item-privacy a {
+    font-weight: bold; /* 글씨 굵게 */
+}
+
+.FooterSiteSNS .menu-footersns-container ul {
+    padding: 0;
+    list-style: none;
+    display: flex; /* 수평 정렬 */
+    gap: 20px; /* 항목 간 간격 */
+}
+
+.FooterSiteSNS .menu-footersns-container li {
+    position: relative;
+    width: 20px; /* 아이콘의 크기를 원하는 만큼 설정 */
+    height: 20px; /* 아이콘의 크기를 원하는 만큼 설정 */
+    background-size: contain; /* 배경 이미지가 요소에 맞게 크기 조정 */
+    background-repeat: no-repeat; /* 배경 이미지 반복 안함 */
+    background-position: center; /* 배경 이미지 중앙 정렬 */
+}
+
+/* 각 아이콘에 맞는 배경 이미지 추가 */
+#menu-item-blog {
+    background-image: url('/img/ico-sns-Blog.png');
+}
+#menu-item-youtube {
+    background-image: url('/img/ico-sns-youtube.png');
+}
+#menu-item-naver {
+    background-image: url('/img/ico-sns-naver.png');
+}
+#menu-item-instagram {
+    background-image: url('/img/ico-sns-instagram.png');
+}
+#menu-item-facebook {
+    background-image: url('/img/ico-sns-facebook.png');
+}
+#menu-item-linkedin {
+    background-image: url('/img/ico-sns-linkedin.png');
+}
+
+/* 클릭할 수 있게 a 태그를 block으로 설정 */
+.FooterSiteSNS li a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none; /* 링크 스타일 제거 */
+    visibility: visible; /* 텍스트는 보이지 않지만 링크는 클릭 가능 */
+}
+
+/* 텍스트 숨기기 */
+.FooterSiteSNS li a span {
+    visibility: hidden; /* 텍스트 숨기기 */
+}
+
+/* hover 상태 */
+.FooterSiteSNS li a:hover {
+    cursor: pointer;
+}
+
+
+
+
+/* FooterCopy: 로고와 Family Site를 양쪽 끝으로 배치 */
+.FooterCopy {
+    display: flex; /* 플렉스 레이아웃 */
+    justify-content: space-between; /* 양쪽 끝으로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    padding: 20px 0; /* 위아래 여백 */
+}
+
+/* FooterCopyInfo: 로고와 텍스트를 묶은 섹션 */
+.FooterCopyInfo {
+    display: flex; /* 플렉스 레이아웃 */
+    flex-direction: column; /* 세로 방향으로 배치 */
+    align-items: flex-start; /* 왼쪽 정렬 */
+    gap: 5px; /* 로고와 텍스트 간격 */
+}
+
+/* FooterCopyInfo 로고 스타일 */
+.FooterCopyInfo-logo {
+    background-image: url('/img/logo-white.png'); /* 로고 이미지 경로 */
+    background-size: contain; /* 이미지 크기 조정 */
+    background-repeat: no-repeat; /* 반복 없음 */
+    width: 150px; /* 로고 너비 */
+    height: 50px; /* 로고 높이 */
+}
+
+.FooterCopyInfo-logo .ab-text {
+    visibility: hidden; /* 텍스트 숨기기 */
+}
+
+/* FooterCopy 텍스트 스타일 */
+.FooterCopy-text {
+    font-size: 12px;
+    color: #bbb; /* 연한 회색 */
+}
+
+
+/* FamilySite 기본 스타일 */
+.FamilySite {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    position: relative; /* 메뉴 리스트를 상대적으로 위치 */
+    width: 150px;
+    color: #fff;
+    border-bottom: 1px solid #fff; /* 밑줄 추가 */
+    padding-bottom: 5px; /* 텍스트와 밑줄 간격 */
+}
+
+/* FamilySite 텍스트 */
+.FamilySite-text {
+    font-size: 14px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #fff;
+}
+
+.FamilySite-icon {
+    font-size: 16px;
+    transition: transform 0.3s ease; /* 회전 애니메이션 */
+}
+
+
+
+
+/* 메뉴 안의 텍스트 스타일 */
+.menu-familymenu-container ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.SingleGameTempListCont-item {
-    margin-bottom: 20px;
-    font-size: 16px;
-    color: white;
+.menu-familymenu-container li {
+    margin-bottom: 10px;
 }
 
-/* 스토어 링크 컨테이너 */
-.SingleGameStore {
-    margin-top: 20px;
-}
-
-.SingleGameStore-list {
-    list-style: none; /* 점(기본 목록 스타일) 제거 */
-    display: flex;
-    gap: 20px; /* 아이콘 간격 */
-}
-
-.SingleGameStore-item{
-    width: 130px;
-    height: auto;
-}
-
-/* a 태그에 border를 적용하고 inline-block으로 처리 */
-.SingleGameStoreItem-link {
-    display: inline-block; /* 이미지 크기에 맞게 a 태그가 block처럼 동작 */
-    border: solid 1px #393939;
-    padding: 7px 15px;
-}
-
-/* 스토어 이미지 크기 설정 */
-.SingleGameStore-item img {
-    width: 120px;
-    height: auto;
-}
-
-/* 게임하단 Link */
-.SingleGameTempStudio {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-    text-align: center;
-}
-
-.SingleGameTempStudio-link {
-    display: block;
+.menu-familymenu-container a {
+    color: #fff;
     text-decoration: none;
-    color: inherit;
-    padding: 15px;
-    border: solid 1px #ccc;
-    width: 900px; /* 필요에 따라 크기 설정 */
+    display: block;
+}
+
+.menu-familymenu-container a:hover {
+    color: #f8f8f8;
+    transition: color 0.3s ease;
+}
+
+/* 아이콘 회전 (활성화 시) */
+.FamilySite.active .FamilySite-icon {
+    transform: rotate(45deg); /* "+"를 "x"로 회전 */
+}
+
+/* 기본 상태 */
+.menu-familymenu-list {
+    display: none;
+    background-color: white;
+    width: 300px;
+    height: 600px;
+}
+
+/* active 상태 */
+.active {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.boxOpen{
+    display: block;
+  
 }

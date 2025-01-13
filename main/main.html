@@ -72,9 +72,9 @@
                         <img id="dynamic-image" class="SingleGameTempFullPhoto-img" src="/img/PUBG_NEW_STATE_LAUNCH_Thumb.png" alt="launchthumb">
                         <span class="SingleGameTempFullPhoto-icon"></span>
                         <!-- 동영상은 YouTube iframe으로 표시 -->
-                    <div id="video" style="display: none;">
-                        <iframe loading="lazy" title="pubg-new-state" src="https://www.youtube.com/embed/htld_r86pfI" width="100%" height="100%" frameborder="0" allowfullscreen="allowfullscreen"></iframe></div>
-                    </div>
+                        <div id="video" style="display: none;">
+                            <iframe loading="lazy" title="pubg-new-state" src="https://www.youtube.com/embed/htld_r86pfI" width="100%" height="100%" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                        </div>
                     </a>
                 </div>
 
@@ -205,6 +205,7 @@
                                         <p class="SingleGameTempAtc-text">
                                             <a class="SingleGameTempAtc-link" href="https://newstate.pubg.com/index.html" target="_blank" rel="noopener">
                                                 <span class="TextHoverLine">공식 사이트 바로가기</span>
+                                                <a href="https://newstate.pubg.com/ko" target="newstatemobile" class="SingleGameTempAtc-mobile"></a>
                                             </a>
                                         </p>
                                     </div>
@@ -241,13 +242,10 @@
                     </dl>
                 </div>
 
-                 <!-- 게임 하단 link -->
+                <!-- 게임 하단 link -->
                 <div class="SingleGameTempStudio">
                     <!-- 게임 하단 -->
-                    <a class="SingleGameTempStudio-link">
-                        <div class="SingleGameTempStudioThumb Logo-Pubg">
-                            <img src="/img/studio-pubg-logo-1.png" alt="PUBG Studios" />
-                        </div>
+                    <a href="https://www.krafton.com/studios/pubg/" class="SingleGameTempStudio-link">
                         <!-- 게임 하단 link text -->
                         <div class="SingleGameTempStudioCont">
                             <div class="SingleGameTempStudioMeta">
@@ -257,21 +255,140 @@
                             <h5 class="SingleGameTempStudio-title">
                                 <span class="TextHoverLine">PUBG STUDIOS</span>
                             </h5>
-                            <div class="SingleGameTempStudio-sub">PUBG를 가장 강력한 문화 IP로 성장시키겠습니다</div>
+                            <div class="SingleGameTempStudio-sub">
+                                <span class="TextHoverLine">PUBG를 가장 강력한 문화 IP로 성장시키겠습니다</span></div>
                             <div class="SingleGameTempStudio-arrow">
-                                <span class="ab-text">More</span>
+                                <img src="/img/ico-post-arrow.png" alt="More Icon" />
                             </div>
+                        </div>
+                        <!-- 게임 하단 logo -->
+                        <div class="SingleGameTempStudioThumb Logo-Pubg">
+                            <img src="/img/studio-pubg-logo-1.png" alt="PUBG Studios" />
                         </div>
                     </a>
                 </div>
-
-
-
             </div>
         </div>
     </main>
-    <footer>
 
+    <footer>
+        <div class="footer-container">
+			<!-- FooterSiteMenu -->
+            <div class="FooterSiteMenu">
+                <div class="FooterSiteUrl">
+                    <div class="menu-footerlink-container">
+                        <ul id="menu-footerlink" class="menu">
+                            <li id="menu-item-location" class="menu-item">
+                                <a href="https://www.krafton.com/location/">찾아오시는 길</a>
+                            </li>
+                            <li id="menu-item-privacy" class="text-bold menu-item">
+                                <a href="https://www.krafton.com/privacy-policy/">개인정보처리방침</a>
+                            </li>
+                            <li id="menu-item-contact" class="menu-item">
+                                <a href="https://www.krafton.com/contact/">문의하기</a>
+                            </li>
+                            <li id="menu-item-speakup" class="menu-item">
+                                <a href="https://www.krafton.com/speakup/">열린신고제도</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="FooterSiteSNS">
+                    <div class="menu-footersns-container">
+                        <ul id="menu-footersns" class="menu">
+                            <li id="menu-item-blog" class="ico-kraftonblog">
+                                <a href="https://blog.krafton.com/" target="_blank" rel="noopener"></a>
+                            </li>
+                            <li id="menu-item-youtube" class="ico-youtube">
+                                <a href="https://www.youtube.com/KRAFTONofficial" title="Youtube" target="_blank" rel="noopener"></a>
+                            </li>
+                            <li id="menu-item-naver" class="ico-naver">
+                                <a href="https://post.naver.com/kraftongameunion" title="Naver Post" target="_blank" rel="noopener"></a>
+                            </li>
+                            <li id="menu-item-instagram" class="ico-instagram">
+                                <a href="https://www.instagram.com/krafton.today/" title="Instagram" target="_blank" rel="noopener"></a>
+                            </li>
+                            <li id="menu-item-facebook" class="ico-facebook">
+                                <a href="https://www.facebook.com/Krafton.official/" title="Facebook" target="_blank" rel="noopener"></a>
+                            </li>
+                            <li id="menu-item-linkedin" class="ico-LinkedIn">
+                                <a href="https://www.linkedin.com/company/krafton-inc/" title="LinkedIn" target="_blank" rel="noopener"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- FooterFamilySiteMenu -->
+            <div class="FooterCopy">
+                <!--  FooterCopyInfo-->
+                <div class="FooterCopyInfo">
+                    <div class="FooterCopyInfo-logo">
+                        <span class="ab-text">KRAFTON</span>
+                    </div>
+                    <div class="FooterCopy-text">© 2021 KRAFTON, Inc. All rights reserved.</div>
+                </div>
+
+                <!-- familysite -->
+                <div class="FamilySite" onclick="clickBtn()">
+                    <a class="FamilySite-text" href="#;">Family Site</a>
+                    <span class="FamilySite-icon">+</span>
+                </div>
+                <!-- familysite-list -->
+                <div class="menu-familymenu-list">
+                    <div class="menu-familymenu-container">
+                        <ul id="menu-familymenu" class="menu">
+                            <li id="menu-item-pubg" class="menu-item-pubgstudios">
+                                <a target="_blank" rel="noopener" href="https://www.pubg.com/">PUBG STUDIOS</a>
+                            </li>
+                            <li id="menu-item-rising" class="menu-item-risingwings">
+                                <a target="_blank" rel="noopener" href="http://www.risingwings.com/">RISINGWINGS</a>
+                            </li>
+                            <li id="menu-item-sds" class="menu-item-striking">
+                                <a target="_blank" rel="noopener" href="https://sds.com/">Striking Distance Studios</a>
+                            </li>
+                            <li id="menu-item-dream" class="menu-item-dreamotion">
+                                <a target="_blank" rel="noopener" href="http://dreamotion.us/">DREAMOTION</a>
+                            </li>
+                            <li id="menu-item-unknown" class="menu-item-unknownworlds">
+                                <a href="https://unknownworlds.com/">Unknown Worlds</a>
+                            </li>
+                            <li id="menu-item-5min" class="menu-item-5minlab">
+                                <a href="https://5minlab.com/ko/">5minlab</a>
+                            </li>
+                            <li id="menu-item-kraftonmontreal" class="menu-item-kraftonmontrealstudio">
+                                <a href="https://kraftonmontreal.com">KRAFTON Montréal Studio</a></li>
+                            <li id="menu-item-relug" class="menu-item-relugames">
+                                <a href="https://www.relugames.com">ReLU Games</a>
+                                /li>
+                            <li id="menu-item-flyway" class="menu-item-flywaygames">
+                                <a href="https://flywaygames.com/">Flyway Games</a>
+                            </li>
+                            <li id="menu-item-things" class="menu-item-thingsflow">
+                                <a href="https://thingsflow.com/">thingsflow</a>
+                            </li>
+                            <li id="menu-item-over" class="menu-itemoverdare">
+                                <a href="https://overdare.com">OVERDARE</a>
+                            </li>
+                            <li id="menu-item-pubgesports" class="menu-item-pubgEsports">
+                                <a target="_blank" rel="noopener" href="https://www.pubgesports.com/">PUBG Esports</a>
+                            </li>
+                            <li id="menu-item-pubgmobile" class="menu-item-pubgMobileEsports">
+                                <a href="https://esports.pubgmobile.kr/">PUBG Mobile Esports</a>
+                            </li>
+                            <li id="menu-item-jungle" class="menu-item-kraftonjungle">
+                                <a href="https://jungle.krafton.com/">KRAFTON JUNGLE</a>
+                            </li>
+                            <li id="menu-item-kraftonai" class="menu-item-kraftonAI">
+                                <a href="https://www.krafton.ai/">KRAFTON AI</a>
+                            </li>
+                            <li id="menu-item-kraftin" class="menu-item-kraftonindia">
+                                <a href="https://www.krafton.in/">KRAFTON INDIA</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
 </body>
 <script src="/js/main.js"></script>

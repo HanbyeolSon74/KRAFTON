@@ -89,36 +89,23 @@ video.addEventListener("ended", () => {
 });
 
 // 3개의 이미지 스크롤 시 효과
-document.addEventListener('DOMContentLoaded', () => {
-    const img = document.getElementById('ScrollLeftimg');
-    const tumbContainer = document.querySelector('.SingleGameTempLeftTumb');
-    let isTumbVisible = false;
-
-    // Intersection Observer 설정
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                isTumbVisible = true; // 요소가 화면에 보임
-            } else {
-                isTumbVisible = false; // 요소가 화면에서 벗어남
-            }
-        });
-    });
-
-    // 타겟 요소 감시 시작
-    observer.observe(tumbContainer);
-
-    // 스크롤 이벤트 핸들링
-    document.addEventListener('scroll', () => {
-        if (isTumbVisible) {
-            const scrollY = window.scrollY;
-            const containerTop = tumbContainer.getBoundingClientRect().top + window.scrollY;
-            const translateY = Math.max(0, scrollY - containerTop); // 이미지 이동 계산
-            img.style.transform = `translateY(${translateY}px)`;
-        }
-    });
-});
-
+document.addEventListener("scroll", function () {
+    const tumb = document.querySelector(".SingleGameTempLeftTumb"); // 이미지 고정 영역
+    const image = document.querySelector("#ScrollLeftimg"); // 움직이는 이미지
+    const tumbRect = tumb.getBoundingClientRect(); // 고정 영역의 위치 정보 가져옴
+    const windowHeight = window.innerHeight; // 브라우저 창 높이
+    const imageHeight = image.offsetHeight; // 이미지 실제 높이
+    const tumbHeight = tumb.offsetHeight; // 고정 영역의 높이
+  
+    // 고정 영역이 화면에 조금이라도 잡히면 이미지 움직이기 시작
+    if (tumbRect.top < windowHeight && tumbRect.bottom > 0) {
+      const scrollableHeight = imageHeight - tumbHeight; // 스크롤 가능한 이미지 높이 계산
+      const visibleRatio = Math.min(Math.max((windowHeight - tumbRect.top) / tumbHeight, 0), 1); // 스크롤 비율 (0~1 사이)
+      const moveDistance = -scrollableHeight * visibleRatio; // 이동 거리 계산
+      image.style.transform = `translateY(${moveDistance}px)`; // 스크롤에 따른 이미지 이동
+    }
+  });
+  
 // 게임 하단 숫자
 document.addEventListener("DOMContentLoaded", function () {
     let counterElement = document.getElementById("counter");
@@ -152,3 +139,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener("scroll", handleScroll);
 });
+
+
+
+
+let openMenu = false;
+
+const clickBtn = () =>{
+    openMenu = !openMenu;
+    const familySite = document.querySelector(".FamilySite");
+    const menuList = document.querySelector(".menu-familymenu-list");
+    if(openMenu){
+        familySite.classList.toggle("boxOpen");
+        menuList.classList.toggle("active");
+    }else{
+        familySite.classList.remove("boxOpen");
+        menuList.classList.remove("active");
+    }
+}
+
+
+
+
