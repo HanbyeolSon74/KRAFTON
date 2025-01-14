@@ -33,11 +33,6 @@ mobileToggle.addEventListener('click', () => {
 });
 
 
-
-
-
-
-
 // 동영상, 이미지
 const imageContainer = document.getElementById("image-container");
 const videoContainer = document.getElementById("video-container");
