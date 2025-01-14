@@ -4,7 +4,6 @@ body {
     color: white;
     margin: 0;
     font-family: Arial, sans-serif;
-
     justify-content: center; 
     align-items: center;
     font-family: "Noto Sans", "Noto Sans SC", "Noto Sans KR", Dotum, 돋움, Helvetica, "Apple SD Gothic Neo", sans-serif;
@@ -14,13 +13,18 @@ body {
     word-break: keep-all;
 }
 
-/* 헤더 전체 컨테이너 */
+
+/* 헤더 고정 */
 .Header-container {
     width: 100%;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.7); /* 투명한 검정색 */
     padding: 30px 0;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
-    position: relative; 
+    position: fixed; /* 고정 */
+    top: 0; /* 페이지 상단에 고정 */
+    left: 0;
+    z-index: 999; /* 다른 요소들보다 위에 보이게 설정 */
+    transition: top 0.3s; /* 부드러운 이동 효과 */
 }
 
 /* Header-container의 밑줄 */
@@ -110,17 +114,85 @@ body {
 }
 
 
-/* 반응형 (모바일) */
+/* 기존 Header-container 및 Menu 스타일 유지 */
+
+
+/* 모바일 메뉴 초기 상태 (숨겨짐) */
+.MobileMenu {
+    display: none; /* 기본적으로 숨김 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 999;
+    transition: transform 0.3s ease;
+}
+
+/* 모바일 메뉴 내 항목 스타일 */
+.MobileNav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 100px;
+}
+
+.MobileNav a {
+    color: white;
+    text-decoration: none;
+    font-size: 22px;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.MobileNav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 햄버거 메뉴 버튼 스타일 */
+.MenuToggle {
+    display: none; /* 기본적으로 숨김 */
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    position: absolute; /* 메뉴와 독립적으로 위치 설정 */
+    top: 20px; /* 상단에 고정 */
+    right: 20px; /* 오른쪽에 고정 */
+    z-index: 1000; /* 햄버거 버튼이 메뉴 위에 표시되도록 */
+}
+
+/* 햄버거 메뉴 아이콘 */
+.MenuToggle div {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+}
+
+/* 모바일에서 메뉴 토글 버튼을 보이도록 */
 @media (max-width: 768px) {
     .SiteHeaderMenu {
-        flex-direction: column; 
+        display: flex;
+        flex-direction: row;
         align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
     }
 
     .Nav-menu {
-        flex-wrap: wrap; 
-        justify-content: center; 
-        gap: 15px;
+        display: none; /* 메뉴 숨김 */
+    }
+
+    .Logo-link {
+        margin-left: 0; /* 로고 왼쪽 정렬 */
+    }
+
+    .MenuToggle {
+        display: flex; /* 햄버거 메뉴 버튼 표시 */
     }
 }
 
@@ -133,6 +205,7 @@ body {
     background-color: black;
     overflow: hidden; 
     left: 8%; 
+    top: 50px;
 }
 
 /* 배너 이미지 */
@@ -297,75 +370,86 @@ body {
     z-index: 1;
 }
 
-/* 이미지/동영상 관련 스타일 */
-.scrollmagic-pin-sqacer {
-    position: relative;
-    height: 100vh; /* 뷰포트 높이에 맞추기 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .SingleGameTempFullPhoto-link {
     display: block;
     position: relative;
 }
 
-/* 이미지 스타일 */
-.SingleGameTempFullPhoto-img {
-    width: 50vw; /* 초기 너비 */
-    height: auto; 
-    object-fit: cover; 
-    cursor: pointer; /* 클릭할 수 있도록 커서 설정 */
-    transition: all 0.3s ease; /* 부드러운 변화 */
+
+/* 이미지가 전체화면이 되었을 때 동영상 실행 아이콘 보이기 */
+.SingleGameTempFullPhoto-img.fullscreen + .SingleGameTempFullPhoto-icon {
+    display: block;
 }
 
-.SingleGameTempFullPhoto-icon {
-    display: none; 
+/* 공통 스타일 */
+.image-container,
+.video-container {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); 
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease; /* 크기 조정 시 부드러운 애니메이션 */
+    width: 100vw; /* 화면 너비에 맞춤 */
+    height: 100vh; /* 화면 높이에 맞춤 */
+}
+
+.image-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease, width 0.2s ease, height 0.3s ease;
+    z-index: 2;
+}
+
+
+.SingleGameTempFullPhoto-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+
+/* 동영상 실행 아이콘 */
+.SingleGameTempFullPhoto-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 100px;
-    height: 100px; 
-    background-image: url('/img/ico-youtube-play.png'); 
+    height: 100px;
+    background-image: url('/img/ico-youtube-play.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-    z-index: 15; 
+    z-index: 3;
+    opacity: 0; /* 초기에는 숨김 */
+    transition: opacity 0.3s ease;
 }
 
-/* 이미지가 전체화면이 되었을 때 동영상 실행 아이콘 보이기 */
-.SingleGameTempFullPhoto-img.fullscreen + .SingleGameTempFullPhoto-icon {
-    display: block; 
+/* 활성화된 동영상 */
+.video-container.active {
+    display: block;
+    z-index: 3; /* 최상위로 표시 */
 }
 
-/* 동영상 스타일 */
-#video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50vw; 
-    height: auto; 
-    display: none; 
-    z-index: 10; 
+/* 숨김 상태 */
+.image-container.hidden {
+    display: none;
 }
 
-/* 동영상 재생 이미지 클릭을 위한 설정 */
-.SingleGameTempFullPhoto-img:active {
-    opacity: 0.8; 
-}
-
-/* 이미지/동영상 스크롤 간격 */
+/* 스크롤 이벤트 */
 .scrollmagic-pin-sqacer {
     position: relative;
-    height: 100vh; 
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 80px; 
+    margin-bottom: 80px;
 }
+
 
 /* 3개의 이미지 */
 
@@ -381,27 +465,46 @@ body {
 }
 
 /* 이미지가 보여지는 고정 영역 */
-.SingleGameTempLeftTumb {
+.SingleGameTempLeftTumb,
+.SingleGameTempLeftTumb2 {
     position: relative;
-    width: 750px;
+    width: 730px;
     height: 440px; /* 고정된 높이 */
     overflow: hidden; /* 고정된 영역 밖 이미지 숨김 */
-    border: 2px solid #ccc;
+    left: -150px;
     margin: 0 auto; /* 가운데 정렬 */
   }
   
+.SingleGameTempRightTumb {
+    position: relative;
+    width: 730px;
+    height: 440px; /* 고정된 높이 */
+    overflow: hidden; /* 고정된 영역 밖 이미지 숨김 */
+    margin: 0 auto; /* 가운데 정렬 */
+    left: 250px;
+  }
+
   /* 스크롤 시 움직이는 이미지 */
-  .SingleGameTempLeftTumb-img {
+.SingleGameTempLeftTumb-img,
+.SingleGameTempLeftTumb2-img {
     position: absolute;
     top: 0; /* 초기 위치 설정 */
-    left: 0;
+    left: -90px;
     width: 900px; /* 이미지의 가로 크기를 고정 영역에 맞춤 */
     height: 600px; /* 비율에 따라 세로 크기 조정 */
     transform: translateY(0); /* 초기 상태 */
     transition: transform 0.1s ease-out; /* 부드러운 이동 */
-  }
+}
 
-
+.SingleGameTempRightTumb-img {
+    position: absolute;
+    top: -230px; /* 초기 위치 설정 */
+    left: -90px;
+    width: 900px; /* 이미지의 가로 크기를 고정 영역에 맞춤 */
+    height: 600px; /* 비율에 따라 세로 크기 조정 */
+    transform: translateY(0); /* 초기 상태 */
+    transition: transform 0.1s ease-out; /* 부드러운 이동 */
+}
 
 .SingleGameTempLeftCont,
 .SingleGameTempRightCont {
@@ -808,12 +911,43 @@ a {
     color: inherit; /* 부모 요소에서 색상 상속받기 */
 }
 
+/* 클릭시 최상단 */
+.scroll-to-top-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 70px; /* 버튼 크기 */
+    height: 70px; /* 버튼 크기 */
+    background-color: white; /* 기본 배경 흰색 */
+    border: none; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border 0.3s ease;
+    z-index: 100; /* 다른 요소들보다 위에 나타나도록 설정 */
+}
+
+/* 이미지 기본 상태 */
+.scroll-to-top-btn img {
+    width: 17px;
+    height: 8px;
+    transition: transform 0.3s ease; /* 이미지 변환을 부드럽게 */
+}
+
+/* 호버 시 상태 */
+.scroll-to-top-btn:hover {
+    background-color: black; /* 배경을 검정색으로 변경 */
+    border: 1px solid white; /* 테두리 추가 */
+}
+
 
 /* footer */
 footer {
     color: #fff; /* 글자 색상 */
     padding: 20px 0; /* 푸터 상하 여백 */
     margin-top: 200px; /* footer와 main 사이에 여백 추가 */
+  z-index: 1000;
 }
 
 .footer-container {
@@ -821,6 +955,7 @@ footer {
     max-width: 1200px; /* 최대 너비 */
     margin: 0 auto; /* 가로 중앙 정렬 */
     padding: 0 20px;
+  
 }
 
 /* FooterSiteMenu: 가로로 정렬 */
@@ -951,6 +1086,9 @@ footer {
     justify-content: space-between; /* 양쪽 끝으로 정렬 */
     align-items: center; /* 세로 중앙 정렬 */
     padding: 20px 0; /* 위아래 여백 */
+    /* Footer의 부모 요소에 relative 추가 */
+    position: relative; /* 부모 요소에 상대적인 위치 추가 */
+
 }
 
 /* FooterCopyInfo: 로고와 텍스트를 묶은 섹션 */
@@ -980,37 +1118,59 @@ footer {
     color: #bbb; /* 연한 회색 */
 }
 
-
-/* FamilySite 기본 스타일 */
+/* FamilySite 스타일 */
 .FamilySite {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    position: relative; /* 메뉴 리스트를 상대적으로 위치 */
-    width: 150px;
+    position: relative; /* 위치를 relative로 설정하여 자식 요소인 메뉴 리스트가 그 기준으로 위치하게 함 */
+    width: 230px;
     color: #fff;
-    border-bottom: 1px solid #fff; /* 밑줄 추가 */
-    padding-bottom: 5px; /* 텍스트와 밑줄 간격 */
+    border-bottom: 1px solid #fff;
+    padding-bottom: 5px;
 }
 
-/* FamilySite 텍스트 */
 .FamilySite-text {
     font-size: 14px;
     text-transform: uppercase;
-    text-decoration: none;
-    color: #fff;
 }
 
 .FamilySite-icon {
     font-size: 16px;
-    transition: transform 0.3s ease; /* 회전 애니메이션 */
+    transition: transform 0.3s ease;
 }
 
+/* FamilySite 활성화 시 아이콘이 X로 변환 */
+.FamilySite.active .FamilySite-icon {
+    transform: rotate(45deg);
+}
 
+/* 메뉴 리스트 스타일 */
+.menu-familymenu-list {
+    position: fixed; /* 화면 하단에 고정 */
+    bottom: 100px; /* FamilySite 글 바로 위에 위치하도록 설정 */
+    right: 105px; /* 메뉴를 왼쪽으로 더 이동 (값을 줄여서 왼쪽으로 이동) */
+    width: 200px;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    font-size: 13px;
+    border: 1px solid white;
+    z-index: 1000;
+    transform: translateY(5%); /* 처음엔 메뉴가 하단에 숨겨짐 */
+    opacity: 0; /* 처음엔 투명 상태 */
+    visibility: hidden; /* 처음엔 보이지 않음 */
+    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease; /* 슬라이딩 애니메이션 및 투명도, 가시성 애니메이션 */
+}
 
+/* active 클래스가 추가되면 메뉴가 위로 올라오게 하기 */
+.menu-familymenu-list.active {
+    transform: translateY(0); /* 메뉴가 위로 슬라이드 업 */
+    opacity: 1; /* 메뉴가 완전히 보이도록 설정 */
+    visibility: visible; /* 메뉴가 보이도록 설정 */
+}
 
-/* 메뉴 안의 텍스트 스타일 */
 .menu-familymenu-container ul {
     list-style: none;
     padding: 0;
@@ -1024,36 +1184,8 @@ footer {
 .menu-familymenu-container a {
     color: #fff;
     text-decoration: none;
-    display: block;
 }
 
 .menu-familymenu-container a:hover {
     color: #f8f8f8;
-    transition: color 0.3s ease;
-}
-
-/* 아이콘 회전 (활성화 시) */
-.FamilySite.active .FamilySite-icon {
-    transform: rotate(45deg); /* "+"를 "x"로 회전 */
-}
-
-/* 기본 상태 */
-.menu-familymenu-list {
-    display: none;
-    background-color: white;
-    width: 300px;
-    height: 600px;
-}
-
-/* active 상태 */
-.active {
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.boxOpen{
-    display: block;
-  
 }

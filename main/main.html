@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-</head>
+    </head>
 <body>
     <header>
         <!-- 헤더 전체 컨테이너 -->
@@ -27,8 +30,37 @@
                     <a href="#">News</a>
                     <a href="#" class="SiteHeaderLang-link">KO</a>
                 </nav>
-            </div>
-        </div>
+
+                <!-- 햄버거 메뉴 버튼 -->
+                        <div class="MenuToggle">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 모바일 메뉴 -->
+                <div class="MobileMenu" id="mobileMenu">
+                    <!-- 햄버거 버튼을 모바일 메뉴에도 추가 -->
+                    <div class="MenuToggle mobileToggle">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="MobileNav">
+                        <a href="#">About</a>
+                        <a href="#">Studios</a>
+                        <a href="#">Games</a>
+                        <a href="#">More Experience</a>
+                        <a href="#">Careers</a>
+                        <a href="#">IR</a>
+                        <a href="#">CSR</a>
+                        <a href="#">News</a>
+                        <a href="#" class="SiteHeaderLang-link">KO</a>
+                    </div>
+                </div>
+
         <!--  배너 -->
         <div class="SingleGameTopBanner">
             <div class="SingleGameTopBannerinner">
@@ -67,13 +99,25 @@
             <div class="PageContent">
                 <!-- 이미지/동영상 스크롤-->
                 <div class="scrollmagic-pin-sqacer">
-                    <!-- 이미지/동영상 링크 -->
-                    <a class="SingleGameTempFullPhoto-link">
-                        <img id="dynamic-image" class="SingleGameTempFullPhoto-img" src="/img/PUBG_NEW_STATE_LAUNCH_Thumb.png" alt="launchthumb">
-                        <span class="SingleGameTempFullPhoto-icon"></span>
-                        <!-- 동영상은 YouTube iframe으로 표시 -->
-                        <div id="video" style="display: none;">
-                            <iframe loading="lazy" title="pubg-new-state" src="https://www.youtube.com/embed/htld_r86pfI" width="100%" height="100%" frameborder="0" allowfullscreen="allowfullscreen"></iframe>
+                    <!-- 이미지 영역 -->
+                <div id="image-container" class="image-container">
+                    <img id="dynamic-image" class="SingleGameTempFullPhoto-img" src="/img/PUBG_NEW_STATE_LAUNCH_Thumb.png" alt="launchthumb">
+                    <span class="SingleGameTempFullPhoto-icon"></span>
+                </div>
+
+                <!-- 동영상 영역 -->
+                <div id="video-container" class="video-container">
+                    <iframe 
+                        id="video-iframe"
+                        loading="lazy" 
+                        title="pubg-new-state" 
+                        src="https://www.youtube.com/embed/htld_r86pfI?rel=0" 
+                        width="100%" 
+                        height="100%" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen" 
+                        allowfullscreen="allowfullscreen">
+                    </iframe>
                         </div>
                     </a>
                 </div>
@@ -269,8 +313,14 @@
                 </div>
             </div>
         </div>
+        <!-- 최상위로 이동 버튼 -->
+        <div id="scrollToTopBtn" class="scroll-to-top-btn">
+            <!-- 이미지 -->
+            <img src="/img/ico-top-arrow-b.png" alt="Top" id="scrollToTopIcon" />
+        </div>
+    
+        
     </main>
-
     <footer>
         <div class="footer-container">
 			<!-- FooterSiteMenu -->
@@ -329,8 +379,8 @@
                 </div>
 
                 <!-- familysite -->
-                <div class="FamilySite" onclick="clickBtn()">
-                    <a class="FamilySite-text" href="#;">Family Site</a>
+                <div class="FamilySite" onclick="toggleFamilySite()">
+                    <span class="FamilySite-text">Family Site</span>
                     <span class="FamilySite-icon">+</span>
                 </div>
                 <!-- familysite-list -->

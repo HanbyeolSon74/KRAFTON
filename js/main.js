@@ -1,110 +1,131 @@
-// 스크롤 이벤트 처리 (이미지 크기 조정)
+// 상단바
+let lastScrollTop = 0; // 마지막 스크롤 위치
+const header = document.querySelector('.Header-container'); // 상단바 요소
+
+window.addEventListener('scroll', function() {
+    let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    // 스크롤 방향에 따라 상단바의 표시 여부를 결정
+    if (currentScroll > lastScrollTop) {
+        // 스크롤을 내릴 때 상단바 숨기기
+        header.style.top = '-100px'; // 상단바가 사라지게 설정
+    } else {
+        // 스크롤을 올릴 때 상단바 보이기
+        header.style.top = '0'; // 상단바가 다시 보이게 설정
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // 마지막 스크롤 위치 업데이트
+});
+
+// 메뉴 토글 함수
+const menuToggle = document.querySelector('.MenuToggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileToggle = document.querySelector('.mobileToggle');
+
+// 햄버거 메뉴 클릭 시 메뉴 토글
+menuToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open'); // 메뉴 열기 / 닫기
+});
+
+// 모바일 메뉴 내에서 햄버거 버튼 클릭 시 메뉴 토글
+mobileToggle.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open'); // 메뉴 열기 / 닫기
+});
+
+
+
+
+
+
+
+// 동영상, 이미지
+const imageContainer = document.getElementById("image-container");
+const videoContainer = document.getElementById("video-container");
+const dynamicImage = document.getElementById("dynamic-image");
+const playIcon = document.querySelector(".SingleGameTempFullPhoto-icon");
+const iframe = document.getElementById("video-iframe");
+
+// 스크롤 이벤트 처리
 window.addEventListener("scroll", () => {
-    const image = document.getElementById("dynamic-image");
-    const playIcon = document.querySelector(".SingleGameTempFullPhoto-icon"); // 동영상 실행 아이콘
-    const scrollPosition = window.scrollY; // 현재 스크롤 위치
-    const startPoint = 100; // 이미지 크기 조정 시작점 (px)
-    const fullScreenPoint = 800; // 이미지가 전체화면이 되는 지점 (스크롤 위치 기준)
-    const maxWidth = 100; // 이미지 최대 너비 (vw 단위)
-    const minWidth = 50; // 이미지 최소 너비 (vw 단위)
+  const scrollY = window.scrollY;
+  const startPoint = 100; // 확대 시작 지점
+  const fullScreenPoint = 800; // 전체화면 전환 지점
+  const maxScale = 1; // 최대 크기
+  const minScale = 0.5; // 최소 크기
 
-    // 스크롤이 startPoint 이후로 내릴 때마다 이미지 크기 증가
-    if (scrollPosition >= startPoint && scrollPosition <= fullScreenPoint) {
-        const progress = (scrollPosition - startPoint) / (fullScreenPoint - startPoint); // 0에서 1 사이로 변화
-        const newWidth = minWidth + progress * (maxWidth - minWidth); // 변화 속도 조정
-        image.style.width = `${newWidth}vw`; // 새로운 크기 적용
-    } 
-    // fullScreenPoint 이상에서는 전체화면 고정
-    else if (scrollPosition > fullScreenPoint) {
-        image.style.width = `${maxWidth}vw`; // 전체화면
-        playIcon.style.display = "block"; // 이미지가 전체화면일 때 아이콘 보이기
-    } 
-    // startPoint 이전에서는 초기 크기로 유지
-    else {
-        image.style.width = `${minWidth}vw`;
-        playIcon.style.display = "none"; // 이미지가 최소 크기일 때 아이콘 숨기기
-    }
+  if (scrollY >= startPoint && scrollY <= fullScreenPoint) {
+    const progress = (scrollY - startPoint) / (fullScreenPoint - startPoint);
+    const newScale = minScale + progress * (maxScale - minScale);
+    imageContainer.style.transform = `translate(-50%, -50%) scale(${newScale})`;
+    videoContainer.style.transform = `translate(-50%, -50%) scale(${newScale})`;
+    playIcon.style.opacity = 0;
+  } else if (scrollY > fullScreenPoint) {
+    imageContainer.style.transform = `translate(-50%, -50%) scale(${maxScale})`;
+    videoContainer.style.transform = `translate(-50%, -50%) scale(${maxScale})`;
+    playIcon.style.opacity = 1;
+  } else {
+    imageContainer.style.transform = `translate(-50%, -50%) scale(${minScale})`;
+    videoContainer.style.transform = `translate(-50%, -50%) scale(${minScale})`;
+    playIcon.style.opacity = 0;
+  }
 });
 
-// 이미지 클릭 시 동영상이 나타나고 재생되도록 처리
-const image = document.getElementById("dynamic-image");
-const video = document.getElementById("video");
-const playIcon = document.querySelector(".SingleGameTempFullPhoto-icon"); // 동영상 실행 아이콘
-
-// 이미지 클릭 시 동영상이 나타나고 재생되도록 처리
-image.addEventListener("click", () => {
-    // 이미지 숨기기
-    image.style.display = "none";
-    
-    // 동영상 보이기
-    video.style.display = "block";
-
-    // 동영상 크기와 위치를 이미지와 동일하게 설정
-    const imageRect = image.getBoundingClientRect(); // 이미지의 위치와 크기 정보
-    video.style.position = "absolute";
-    video.style.top = `${imageRect.top}px`; // 이미지의 top 위치로 설정
-    video.style.left = `${imageRect.left}px`; // 이미지의 left 위치로 설정
-    video.style.width = `${imageRect.width}px`; // 이미지의 width로 설정
-    video.style.height = `${imageRect.height}px`; // 이미지의 height로 설정
-    
-    // 동영상 소스가 올바른지 확인
-    video.load(); // 동영상을 다시 로드
-    video.play(); // 동영상 재생
+// 이미지 클릭 시 전체화면 전환
+dynamicImage.addEventListener("click", () => {
+  imageContainer.classList.add("fullscreen");
+  playIcon.style.opacity = 1;
 });
 
-// 동영상 실행 아이콘 클릭 시 동영상이 나타나도록 처리
+// 동영상 재생 버튼 클릭 시 동작
 playIcon.addEventListener("click", () => {
-    // 이미지 숨기기
-    image.style.display = "none";
-    
-    // 동영상 보이기
-    video.style.display = "block";
-
-    // 동영상 크기와 위치를 이미지와 동일하게 설정
-    const imageRect = image.getBoundingClientRect(); // 이미지의 위치와 크기 정보
-    video.style.position = "absolute";
-    video.style.top = `${imageRect.top}px`; // 이미지의 top 위치로 설정
-    video.style.left = `${imageRect.left}px`; // 이미지의 left 위치로 설정
-    video.style.width = `${imageRect.width}px`; // 이미지의 width로 설정
-    video.style.height = `${imageRect.height}px`; // 이미지의 height로 설정
-    
-    // 동영상 소스가 올바른지 확인
-    video.load(); // 동영상을 다시 로드
-    video.play(); // 동영상 재생
+  imageContainer.classList.add("hidden");
+  playIcon.classList.add("hidden");
+  videoContainer.classList.add("active");
+  iframe.src = iframe.src.split("?")[0] + "?autoplay=1&mute=1&rel=0";
 });
 
-// 동영상이 종료되면 다시 이미지로 돌아가도록 설정 (옵션)
-video.addEventListener("ended", () => {
-    // 동영상 숨기기
-    video.style.display = "none";
-    
-    // 이미지 보이기
-    image.style.display = "block";
-    
-    // 이미지 크기를 원래 크기로 되돌리기 (스크롤 상태에 따라 적용)
-    image.style.width = "50vw"; // 초기 크기 예시
-    
-    // 동영상 실행 아이콘 숨기기
-    playIcon.style.display = "none";
+// 동영상 종료 시 초기 상태 복원
+iframe.addEventListener("ended", () => {
+  videoContainer.classList.remove("active");
+  imageContainer.classList.remove("hidden");
+  playIcon.classList.remove("hidden");
 });
 
-// 3개의 이미지 스크롤 시 효과
+
+
+// 3개의 이미지
 document.addEventListener("scroll", function () {
-    const tumb = document.querySelector(".SingleGameTempLeftTumb"); // 이미지 고정 영역
-    const image = document.querySelector("#ScrollLeftimg"); // 움직이는 이미지
-    const tumbRect = tumb.getBoundingClientRect(); // 고정 영역의 위치 정보 가져옴
-    const windowHeight = window.innerHeight; // 브라우저 창 높이
-    const imageHeight = image.offsetHeight; // 이미지 실제 높이
-    const tumbHeight = tumb.offsetHeight; // 고정 영역의 높이
+    const applyScrollEffect = (tumbSelector, imageSelector, reverse = false) => {
+      const tumb = document.querySelector(tumbSelector); // 이미지 고정 영역
+      const image = document.querySelector(imageSelector); // 움직이는 이미지
   
-    // 고정 영역이 화면에 조금이라도 잡히면 이미지 움직이기 시작
-    if (tumbRect.top < windowHeight && tumbRect.bottom > 0) {
-      const scrollableHeight = imageHeight - tumbHeight; // 스크롤 가능한 이미지 높이 계산
-      const visibleRatio = Math.min(Math.max((windowHeight - tumbRect.top) / tumbHeight, 0), 1); // 스크롤 비율 (0~1 사이)
-      const moveDistance = -scrollableHeight * visibleRatio; // 이동 거리 계산
-      image.style.transform = `translateY(${moveDistance}px)`; // 스크롤에 따른 이미지 이동
-    }
+      if (!tumb || !image) return;
+  
+      const tumbRect = tumb.getBoundingClientRect(); // 고정 영역의 위치 정보 가져옴
+      const windowHeight = window.innerHeight; // 브라우저 창 높이
+      const imageHeight = image.offsetHeight; // 이미지 실제 높이
+      const tumbHeight = tumb.offsetHeight; // 고정 영역의 높이
+  
+      // 고정 영역이 화면에 조금이라도 보이면 이미지 움직이기 시작
+      if (tumbRect.top < windowHeight && tumbRect.bottom > 0) {
+        const scrollableHeight = imageHeight - tumbHeight; // 스크롤 가능한 이미지 높이 계산
+        const visibleRatio = Math.min(Math.max((windowHeight - tumbRect.top) / tumbHeight, 0), 1); // 스크롤 비율 (0~1 사이)
+  
+        const moveDistance = scrollableHeight * visibleRatio * (reverse ? 1 : -1); // 이동 거리 계산 (reverse로 방향 설정)
+        image.style.transform = `translateY(${moveDistance}px)`; // 스크롤에 따른 이미지 이동
+      }
+    };
+  
+    // 왼쪽 이미지들에 적용 (스크롤 방향과 동일하게 움직임)
+    applyScrollEffect(".SingleGameTempLeftTumb", "#ScrollLeftimg");
+    applyScrollEffect(".SingleGameTempLeftTumb2", "#ScrollLeftimg2");
+  
+    // 오른쪽 이미지들에 적용 (스크롤 방향과 반대로 움직임)
+    applyScrollEffect(".SingleGameTempRightTumb", "#ScrollRightimg", true);
   });
+  
+
+
   
 // 게임 하단 숫자
 document.addEventListener("DOMContentLoaded", function () {
@@ -141,22 +162,49 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
+ // 최상위로 이동 버튼
+ const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+ const scrollToTopIcon = document.getElementById('scrollToTopIcon'); // 이미지 아이디 가져오기
 
+ // 스크롤 이벤트 리스너
+ window.addEventListener('scroll', () => {
+     if (document.documentElement.scrollTop > 300) {
+         // 버튼이 보이도록 설정
+         scrollToTopBtn.style.display = 'flex';
+     } else {
+         // 버튼이 숨겨지도록 설정
+         scrollToTopBtn.style.display = 'none';
+     }
+ });
 
-let openMenu = false;
+ // 버튼 클릭 시 맨 위로 스크롤
+ scrollToTopBtn.addEventListener('click', () => {
+     window.scrollTo({
+         top: 0,
+         behavior: 'smooth'
+     });
+ });
 
-const clickBtn = () =>{
-    openMenu = !openMenu;
-    const familySite = document.querySelector(".FamilySite");
-    const menuList = document.querySelector(".menu-familymenu-list");
-    if(openMenu){
-        familySite.classList.toggle("boxOpen");
-        menuList.classList.toggle("active");
-    }else{
-        familySite.classList.remove("boxOpen");
-        menuList.classList.remove("active");
-    }
+ // 호버 시 이미지 변경
+ scrollToTopBtn.addEventListener('mouseenter', () => {
+     scrollToTopIcon.src = '/img/ico-top-arrow.png'; // 호버 시 이미지 변경
+ });
+
+ scrollToTopBtn.addEventListener('mouseleave', () => {
+     scrollToTopIcon.src = '/img/ico-top-arrow-b.png'; // 호버 해제 시 이미지 원래 상태로 변경
+ });
+
+// footer familysite
+// FamilySite 클릭 이벤트
+function toggleFamilySite() {
+    const familySite = document.querySelector('.FamilySite');
+    const menuList = document.querySelector('.menu-familymenu-list');
+
+    // FamilySite와 메뉴 리스트 모두에 active 클래스를 토글
+    familySite.classList.toggle('active');
+    menuList.classList.toggle('active');
 }
+
 
 
 
