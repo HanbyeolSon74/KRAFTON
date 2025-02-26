@@ -35,3 +35,4 @@ HTML, CSS, JavaScript를 활용하여 반응형 웹 페이지를 구현하였습
 ![Image](https://github.com/user-attachments/assets/6f1effd4-f69e-4b28-ad05-d5da5e9b87f6)
 
 ## 스크롤 시 CSS기능 ##
+![Image](https://github.com/user-attachments/assets/7f988d32-5f0c-414e-926a-da29ccd4ee5d)
