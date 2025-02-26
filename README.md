@@ -28,4 +28,9 @@ HTML, CSS, JavaScript를 활용하여 반응형 웹 페이지를 구현하였습
 - **애니메이션 추가**: 사용자 경험 향상을 위한 애니메이션 효과 추가
 - **SEO 최적화**: 검색 엔진 최적화를 위한 메타 태그 및 구조 개선
 
-## 관리자 페이지 ##
+## 전체 페이지 ##
+![Image](https://github.com/user-attachments/assets/9bd6dbc2-72b8-4aa3-a551-df554da3ff8a)
+
+## 스크롤 시 동영상 재생 ##
+
+## 스크롤 시 CSS기능 ##
